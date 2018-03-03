@@ -257,6 +257,7 @@
 /* #define __NR_alloc_hugepages	250 */
 /* #define __NR_free_hugepages	251 */
 #define __NR_exit_group		252
+#define __NR_cprocessinf        253
 /* #define __NR_lookup_dcookie	253 */
 /* #define __NR_sys_epoll_create 254 */
 /* #define __NR_sys_epoll_ctl	255 */
