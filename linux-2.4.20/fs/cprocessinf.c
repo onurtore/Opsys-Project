@@ -11,18 +11,18 @@ struct prcdata{
 	pid_t pidparent; /* process id of parent process*/
 	int processcount; /* number of process of owner of current process. */
 };
-asmlinkage int sys_cprocessinf(struct prdata *data, int option, long nicev){
+asmlinkage int sys_cprocessinf(struct prcdata *data, int option, long nicev){
 	
 	if(option==200){
 		cli();
 		struct prcdata kernelstructure;
-		copy_from_user(&kernelstructure, data, sizeof(struct prdata));
+		copy_from_user(&kernelstructure, data, sizeof(struct prcdata));
 		kernelstructure.pid = current->pid;
 		kernelstructure.processcount = current->p_pptr->counter;
 		kernelstructure.pidparent = current->p_pptr;
 		kernelstructure.prio = 20-(current->nice);
                 kernelstructure.weight = (current->counter) + (kernelstructure.prio);
-		copy_to_user(data, &kernelstructure, sizeof(struct prdata));
+		copy_to_user(data, &kernelstructure, sizeof(struct prcdata));
 		sti();	
 	}
 	else if(option==100){
