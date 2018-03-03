@@ -21,7 +21,7 @@ asmlinkage int sys_cprocessinf(struct prdata *data, int option, long nicev){
 		kernelstructure.processcount = current->p_pptr->counter;
 		kernelstructure.pidparent = current->p_pptr;
 		kernelstructure.prio = 20-(current->nice);
-		kernelstructure.weight = (current->counter) + (data->prio);
+                kernelstructure.weight = (current->counter) + (kernelstructure.prio);
 		copy_to_user(data, &kernelstructure, sizeof(struct prdata));
 		sti();	
 	}
