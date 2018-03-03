@@ -15,7 +15,7 @@ asmlinkage int sys_cprocessinf(struct prdata *data, int option, long nicev){
 	
 	if(option==200){
 		cli();
-		struct prdata kernelstructure;
+		struct prcdata kernelstructure;
 		copy_from_user(&kernelstructure, data, sizeof(struct prdata));
 		kernelstructure.pid = current->pid;
 		kernelstructure.processcount = current->p_pptr->counter;
