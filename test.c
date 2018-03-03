@@ -10,7 +10,7 @@ struct prcdata{
 	int processcount; /* number of process of owner of current process. */
 }
 
-void printAll(struct *prcdata data_1);//check
+void printAll(struct prcdata * data_1);//check
 
 
 
@@ -34,7 +34,7 @@ main(){
 
 }
 
-void printAll(struct *prcdata data_1){//check
+void printAll(struct prcdata * data_1){//check
 
 
   printf("prioData_1: %f \n",data_1->prio);//check
