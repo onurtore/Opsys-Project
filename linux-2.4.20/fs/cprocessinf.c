@@ -18,18 +18,20 @@ asmlinkage int sys_cprocessinf(struct prcdata *data, int option, long nicev){
 		struct prcdata kernelstructure;
 		copy_from_user(&kernelstructure, data, sizeof(struct prcdata));
 		kernelstructure.pid = current->pid;
-		kernelstructure.processcount = current->p_pptr->counter;
-		kernelstructure.pidparent = current->p_pptr;
+		kernelstructure.processcount = current->user->processes.counter;
+		kernelstructure.pidparent = current->p_pptr->pid;
 		kernelstructure.prio = 20-(current->nice);
                 kernelstructure.weight = (current->counter) + (kernelstructure.prio);
 		copy_to_user(data, &kernelstructure, sizeof(struct prcdata));
 		sti();	
 	}
 	else if(option==100){
-		current->nice = nicev; /*Fuck you Berk*/
-	}
-	else
+		cli();
+	       	current->nice = nicev; /*Nice things about Berk*/
+                sti();	
+        }
+	else{
 		return -1;
-	
+	}
 	return 0;
 }
